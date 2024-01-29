@@ -23,11 +23,10 @@
     "url": "git+https://github.com/rameel/pagelock.git"
   },
   "keywords": [
-    "lock",
     "pagelock",
-    "page locking",
-    "scroll locking",
-    "scroll lock"
+    "page-locking",
+    "scroll-locking",
+    "scroll-lock"
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
