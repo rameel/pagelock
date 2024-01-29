@@ -94,7 +94,7 @@ function pagelock(): () => void;
  * @param {boolean} [force] - If `true`, forcibly unlocks the page scroll, bypassing the queue;
  * otherwise, only the last lock in the queue will be released. The default is `false`.
  */
-export declare function pageunlock(force?: boolean): void;
+function pageunlock(force?: boolean): void;
 ```
 
 ## License
