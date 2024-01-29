@@ -19,7 +19,7 @@ npm install --save @ramstack/pagelock
 
 #### Vanilla JS
 
-```html
+```vue
 <button onclick="show()">Show Modal</button>
 
 <script>
