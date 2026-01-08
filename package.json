@@ -14,7 +14,7 @@
   "author": "rameel <rameel-b@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c",
+    "build": "rollup -c",
     "prebuild": "npm run clean",
     "clean": "rimraf dist"
   },
@@ -30,10 +30,8 @@
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.3.0",
-    "cross-env": "^10.1.0",
     "rimraf": "^6.1.2",
     "rollup": "^4.55.1",
     "rollup-plugin-bundle-size": "^1.0.3",
