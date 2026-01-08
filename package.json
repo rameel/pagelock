@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "A simple utility for managing page scroll locking. No external dependencies.",
   "type": "module",
+  "author": "rameel <rameel-b@hotmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rameel/pagelock.git"
+  },
   "exports": {
     ".": {
       "import": {
@@ -16,16 +22,10 @@
     "README.md",
     "LICENSE"
   ],
-  "author": "rameel <rameel-b@hotmail.com>",
-  "license": "MIT",
   "scripts": {
     "build": "rollup -c",
     "prebuild": "npm run clean",
     "clean": "rimraf dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rameel/pagelock.git"
   },
   "keywords": [
     "pagelock",
