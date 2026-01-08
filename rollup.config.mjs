@@ -1,10 +1,10 @@
 import resolve from "@rollup/plugin-node-resolve";
 import size from "rollup-plugin-bundle-size";
-import stripComments from "strip-comments";
+import strip_comments from "strip-comments";
 import terser from "@rollup/plugin-terser";
 import typescript from '@rollup/plugin-typescript';
 
-const terserOptions = {
+const terser_options = {
     output: {
         comments: false
     },
@@ -25,7 +25,7 @@ const plugins = [
     resolve(),
     typescript(),
     size(),
-    strip()
+    remove_comments()
 ];
 
 export default [{
@@ -36,7 +36,7 @@ export default [{
     },{
         file: "dist/pagelock.esm.min.js",
         format: "esm",
-        plugins: [terser(terserOptions)]
+        plugins: [terser(terser_options)]
     }, {
         name: "window",
         file: "dist/pagelock.js",
@@ -47,17 +47,17 @@ export default [{
         file: "dist/pagelock.min.js",
         format: "iife",
         extend: true,
-        plugins: [terser(terserOptions)]
+        plugins: [terser(terser_options)]
     }],
     plugins
 }]
 
-function strip() {
+function remove_comments() {
     return {
         name: "strip",
         transform(source) {
             return {
-                code: stripComments(source)
+                code: strip_comments(source)
             };
         }
     };
