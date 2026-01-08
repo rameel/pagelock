@@ -12,7 +12,7 @@ npm install --save @ramstack/pagelock
 
 ### Via CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@ramstack/pagelock@1.0.0/dist/pagelock.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@ramstack/pagelock@1/dist/pagelock.min.js"></script>
 ```
 
 ## Usage examples
