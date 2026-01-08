@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "A simple utility for managing page scroll locking. No external dependencies.",
   "type": "module",
-  "main": "dist/pagelock.esm.js",
-  "module": "dist/pagelock.esm.js",
-  "types": "dist/types/pagelock.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/pagelock.d.ts",
+        "default": "./dist/pagelock.esm.js"
+      }
+    }
+  },
   "files": [
     "dist",
     "README.md",
