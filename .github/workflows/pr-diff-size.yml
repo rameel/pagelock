@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   analyze:
-    if: github.repository == 'rameel/ramstack.alpinegear.js'
+    if: github.repository == 'rameel/pagelock'
     name: Analyze package size changes
 
     runs-on: ubuntu-latest
