@@ -1,12 +1,16 @@
-let locks: Array<number> = [];
-let sequence: number = 0;
+interface ExtendedDocument extends Document {
+    _r_pagelock?: {
+        locks: number[];
+        sequence: number;
+        width?: string | null;
+        props?: {
+            overflow: string;
+            paddingRight: string
+        } | null;
+    };
+}
 
-let width: string;
-
-let props: {
-    overflow: string,
-    paddingRight: string
-} | null | undefined;
+const storage = (document as ExtendedDocument)._r_pagelock ??= { locks: [], sequence: 0 };
 
 /**
  * Locks the page scroll. Subsequent calls to the function add to the queue of lock holders.
@@ -18,30 +22,31 @@ let props: {
  * without affecting the others in the queue.
  */
 export function pagelock(): () => void {
-    if (!props) {
+    if (!storage.props) {
         const {
             offsetHeight,
             clientHeight
         } = document.documentElement;
 
         const style = document.body.style;
-        props = {
+
+        storage.props = {
             overflow: style.overflow,
             paddingRight: style.paddingRight
         };
 
         if (offsetHeight > clientHeight) {
-            style.paddingRight = scrollbarWidth();
+            style.paddingRight = scrollbar_width();
         }
 
         style.overflow = "hidden";
     }
 
-    const seq = ++sequence;
-    locks.push(seq);
+    const seq = ++storage.sequence;
+    storage.locks.push(seq);
 
     return () => {
-        locks = locks.filter(v => v !== seq);
+        storage.locks = storage.locks.filter(v => v !== seq);
         restore();
     };
 }
@@ -54,26 +59,26 @@ export function pagelock(): () => void {
  * Otherwise, only the most recent lock is released. Defaults to `false`.
  */
 export function pageunlock(force?: boolean): void {
-    force ? locks = [] : locks.pop();
+    force ? storage.locks = [] : storage.locks.pop();
     restore();
 }
 
 function restore(): void {
-    if (props && !locks.length) {
-        Object.assign(document.body.style, props);
-        props = null;
+    if (storage.props && !storage.locks.length) {
+        Object.assign(document.body.style, storage.props);
+        storage.props = null;
     }
 }
 
-function scrollbarWidth(): string {
-    if (!width) {
+function scrollbar_width(): string {
+    if (!storage.width) {
         const outer = document.createElement("div");
         outer.innerHTML = "<div style='width:80px;height:80px;position:absolute;left:-90px;top:-90px;overflow:auto'><div style='height:99px'></div></div>";
         const inner = outer.firstChild as HTMLDivElement;
         document.body.appendChild(outer);
-        width = (inner.offsetWidth - inner.clientWidth) + "px";
+        storage.width = (inner.offsetWidth - inner.clientWidth) + "px";
         document.body.removeChild(outer);
     }
 
-    return width;
+    return storage.width;
 }
