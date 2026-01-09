@@ -56,7 +56,7 @@ export default [{
 
 function remove_comments() {
     return {
-        name: "strip",
+        name: "remove_comments",
         transform(source) {
             return {
                 code: strip_comments(source)
