@@ -1,3 +1,4 @@
+import path from "node:path";
 import resolve from "@rollup/plugin-node-resolve";
 import size from "rollup-plugin-bundle-size";
 import strip_comments from "strip-comments";
@@ -25,7 +26,8 @@ const plugins = [
     resolve(),
     typescript(),
     size(),
-    remove_comments()
+    remove_comments(),
+    trim_ws()
 ];
 
 export default [{
@@ -59,6 +61,18 @@ function remove_comments() {
             return {
                 code: strip_comments(source)
             };
+        }
+    };
+}
+
+function trim_ws() {
+    return {
+        name: "trim_ws",
+        generateBundle(options, bundle) {
+            if (options.file.match(/\.js$/)) {
+                const key = path.basename(options.file);
+                bundle[key].code = bundle[key].code.trim();
+            }
         }
     };
 }
